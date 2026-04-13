@@ -10,7 +10,7 @@ function transformStateWithClones(state, actions) {
   // write code here
 
   let newState = { ...state };
-  const array = [];
+  const stateHistory = [];
 
   for (const action of actions) {
     switch (action.type) {
@@ -28,11 +28,15 @@ function transformStateWithClones(state, actions) {
         for (const keys of action.keysToRemove) {
           delete newState[keys];
         }
+        break;
+
+      default:
+        throw new Error('Error');
     }
-    array.push({ ...newState });
+    stateHistory.push({ ...newState });
   }
 
-  return array;
+  return stateHistory;
 }
 
 module.exports = transformStateWithClones;
